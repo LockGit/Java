@@ -18,7 +18,7 @@ Sun Mon Tue Wed Thu Fri Sat
 #4,MulitThreadRunnable.java   MultiThread.java
 ```
 两种java多线程实现方式
-1，MultiThread 通过集成Thread类实现
+1，MultiThread 通过继承Thread类实现
 2，MulitThreadRunnable 通过实现 Runnable 接口实现
 3，两种方式必须实现抽象方法 run
 demo：
