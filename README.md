@@ -12,7 +12,8 @@
 共5个class文件:(图片由starUML导出)
 ```
 ![](https://github.com/LockGit/javaChat/blob/master/doc/javaChat.png)
-
+---
+```
 -+-+-
 ➜  ~ java -version
 java version "1.8.0_65"
@@ -28,9 +29,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.65-b01, mixed mode)
 最后：
 	不需要去重复造轮子,你要做的就是如何使用好现有的轮子！
 	这个世界已经很美好了,不要妄想去改变世界！你要做的就是让这个世界再美好一点！
-	写这个并不是要去做java，我也不熟悉java，理解比coding更重要！！！
+	写这个并不是要去做java，也不熟悉java，理解比coding更重要！！！
 -+-+-
-
+```
 
 
 
