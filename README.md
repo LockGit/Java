@@ -1,5 +1,5 @@
 ### javaChat 一个纯java实现的LAN内聊天工具，sockts + 多线程 。
-演示：
+演示：(javaChat的源代码文件在src目录中)
 ![](https://github.com/LockGit/javaChat/blob/master/doc/javaChatPro.gif)
 
 ```
