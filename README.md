@@ -30,3 +30,6 @@ I am sleep , time is: 2016-11-12 16:14:22:118
 I am sleep , time is: 2016-11-12 16:14:22:118
 时间精确到毫秒
 ```
+
+# a test
+![](https://github.com/LockGit/Java/blob/master/javaChatPro.gif)
