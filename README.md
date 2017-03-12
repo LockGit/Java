@@ -20,20 +20,9 @@ java version "1.8.0_65"
 Java(TM) SE Runtime Environment (build 1.8.0_65-b17)
 Java HotSpot(TM) 64-Bit Server VM (build 25.65-b01, mixed mode)
 
-完成这个javaChat的时候，由于不熟悉java遇到了不少坑。
-整个过程中，也经过了大量的Google和Baidu。
-网上翻阅其他类似项目时，似乎不是这里哪里都有些问题。
-在参考的同时我尽量完善了javaChat，当然还是有很多bug存在其中，
-图形界面的绘制非常啰嗦复杂,我几乎复制了UI界面,节省了很多时间。
-
-最后：
-	不需要去重复造轮子,你要做的就是如何使用好现有的轮子！
-	这个世界已经很美好了,不要妄想去改变世界！你要做的就是让这个世界再美好一点！
-	写这个并不是要去做java，也不熟悉java，理解比coding更重要！！！
+理解比coding更重要！！！！！
 -+-+-
 ```
-
-
 
 ```
 附带一个video 转 gif 的方法：
@@ -48,7 +37,7 @@ javaChat的动图是由：GIF Brewery 3 生成
 ---
 ---
 ---
-# base目录下的java文件为 了解Java 的 HelloWorld 程序
+# base目录下的java文件为完成javaChat前了解Java的HelloWorld程序
 
 #1,Sort.java
 a quick sort for java 
@@ -77,5 +66,5 @@ demo：
 I am sleep , time is: 2016-11-12 16:14:22:118
 I am sleep , time is: 2016-11-12 16:14:22:118
 I am sleep , time is: 2016-11-12 16:14:22:118
-时间精确到毫
+时间精确到毫秒
 ```
