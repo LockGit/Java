@@ -61,6 +61,7 @@ src/main/java/com/lock/demo/Swagger2.java
 接口UI页面
 http://127.0.0.1:8080/swagger-ui.html
 ```
+![](https://github.com/LockGit/javaChat/blob/master/doc/api.gif)
 
 
 ### thrift RPC,以Java为服务端，PHP RPC调用 Java Service
