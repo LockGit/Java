@@ -37,6 +37,18 @@ javaChat的动图是由：GIF Brewery 3 生成
 多人协作的时候经常为了与前端接口对接而感到苦恼，大量的wiki文档，不停的更改，都是很多的工作量。
 使用Swagger2增加文档注解的同时也增强了代码可读性,成本较低。
 
+pom.xml 依赖增加
+<dependency>
+   <groupId>io.springfox</groupId>
+   <artifactId>springfox-swagger2</artifactId>
+   <version>2.8.0</version>
+</dependency>
+<dependency>
+   <groupId>io.springfox</groupId>
+   <artifactId>springfox-swagger-ui</artifactId>
+   <version>2.8.0</version>
+</dependency>
+
 新增Swagger2.java
 src/main/java/com/lock/demo/Swagger2.java
 
