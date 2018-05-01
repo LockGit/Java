@@ -32,39 +32,90 @@ javaChat的动图是由：GIF Brewery 3 生成
 ```
 
 
----
----
----
----
----
-# base目录下的java文件为完成javaChat前了解Java的HelloWorld程序
-
-#1,Sort.java
-a quick sort for java 
-
-#2,Mul.java
-base multiplication rhymes for java
-
-#3,Calendar.java
+### 使用 Swagger2 自动生成java接口文档 (仓库demo-spring文件夹)
 ```
-Sun Mon Tue Wed Thu Fri Sat
-					(11) 12
- 13  14  15  16  17  18  19
- 20  21  22  23  24  25  26
- 27  28  29  30 
+多人协作的时候经常为了与前端接口对接而感到苦恼，大量的wiki文档，不停的更改，都是很多的工作量。
+使用Swagger2增加文档注解的同时也增强了代码可读性,成本较低。
+
+新增Swagger2.java
+src/main/java/com/lock/demo/Swagger2.java
+
+在controller中添加以下相关内容(至少包含这两个描叙)
+自写一些注解即可，避免了多人协作时需要写大量的wiki文档，降低了沟通成本。
+例：
+@Api(value = "用户controller", description = "用户操作", tags = {"用户登录接口"})
+@ApiOperation(value = "测试方法", notes = "需要提供SessionID与版本号AppVersion")
+
+接口UI页面
+http://127.0.0.1:8080/swagger-ui.html
 ```
 
-#4,MulitThreadRunnable.java   MultiThread.java
+
+### thrift RPC,以Java为服务端，PHP RPC调用 Java Service
 ```
-两种java多线程实现方式
-1，MultiThread 通过继承Thread类实现
-2，MulitThreadRunnable 通过实现 Runnable 接口实现
-3，两种方式必须实现抽象方法 run
-demo：
-···
-.....
-I am sleep , time is: 2016-11-12 16:14:22:118
-I am sleep , time is: 2016-11-12 16:14:22:118
-I am sleep , time is: 2016-11-12 16:14:22:118
-时间精确到毫秒
+brew install thrift
+thrift -gen java thrift.thrift 生成java代码
+将thrift生成的代码复制到 demo-spring/target/generated-sources/thrift,IntelliJ IDEA->mark as Source root
+编写UserRpcService.java 实现thrift中定义的两个接口
+编写服务RpcService.java 实现服务端端口监听与服务注册(如下)
 ```
+```java
+public class RpcService {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(RpcService.class);
+    private final static Integer PORT = 6666;
+    public static void main(String[] args) {
+        try {
+            LOGGER.info("start java rpc service ...");
+
+            TServerSocket serverTransport = new TServerSocket(PORT);
+            TServer.Args argsRpc = new TServer.Args(serverTransport);
+            TProcessor processUserRpc = new UserRpc.Processor(new UserRpcService());
+            TBinaryProtocol.Factory portFactory = new TBinaryProtocol.Factory(true, true);
+
+            TMultiplexedProcessor processor = new TMultiplexedProcessor();
+            processor.registerProcessor("userRpc", processUserRpc);
+
+            argsRpc.protocolFactory(portFactory);
+            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverTransport).processor(processor));
+
+//            简单的单线程服务模型，一般用于测试 (测试方法2)
+//            TProcessor tprocessor = new UserRpc.Processor<UserRpc.Iface>(new UserRpcService());
+//            TServerSocket serverTransport = new TServerSocket(PORT);
+//            TServer.Args tArgs = new TServer.Args(serverTransport);
+//            tArgs.processor(tprocessor);
+//            tArgs.protocolFactory(new TBinaryProtocol.Factory());
+//            TServer server = new TSimpleServer(tArgs);
+
+            LOGGER.info("start listen port " + PORT);
+            server.serve();
+        } catch (Exception e) {
+            LOGGER.info("have exception, msg is:" + e.getMessage());
+        }
+
+    }
+}
+```
+
+```
+生成客户端代码：thrift -gen php thrift.thrift
+php调用java测试：
+```
+```php
+define('THRIFT_PATH','php生成的gen-php路径');
+include_once THRIFT_PATH . '/Types.php';
+include_once THRIFT_PATH . '/UserRpc.php';
+
+$socket = new \Thrift\Transport\TSocket('192.168.1.106', 6666);
+$transport = new \Thrift\Transport\TBufferedTransport($socket, 1024, 1024);
+$protocol = new \Thrift\Protocol\TBinaryProtocol($transport);
+$loginProtocol = new \Thrift\Protocol\TMultiplexedProtocol($protocol, "userRpc");
+$loginClient = new \lock\rpc\UserRpcClient($loginProtocol);
+$transport->open();
+echo $loginClient->login('lock', 'test');
+$transport->close();
+```
+**显示:**
+`my rpc service test,you name is:lock,you passwd is:test,from java thrift service`
+--
+**php RPC调用java test Pass**
+
