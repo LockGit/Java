@@ -111,7 +111,7 @@ public class RpcService {
 
 ```
 生成客户端代码：thrift -gen php thrift.thrift
-php调用java测试：
+php调用java RPC 测试：
 ```
 ```php
 define('THRIFT_PATH','php生成的gen-php路径');
@@ -127,8 +127,7 @@ $transport->open();
 echo $loginClient->login('lock', 'test');
 $transport->close();
 ```
-**显示:**
+**成功显示:**
+
 `my rpc service test,you name is:lock,you passwd is:test,from java thrift service`
---
-**php RPC调用java test Pass**
 
